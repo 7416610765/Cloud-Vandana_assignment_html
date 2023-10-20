@@ -1,0 +1,201 @@
+<!-- 2.survey form using Html,css,javascript -->
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<style>
+    /* Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(0, 0, 255);
+    margin: 0;
+    padding: 0;
+}
+
+/* Form Container Styles */
+form {
+    background-color: #fff;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    text-align: center;
+}
+
+/* Form Field Styles */
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+input[type="email"],
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Checkbox Styles */
+.checkbox-group label {
+    display: inline;
+    margin-right: 10px;
+}
+
+/* Button Styles */
+.buttons {
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007a8c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button#reset-button {
+    background-color: #e74c3c;
+}
+
+/* Popup Styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+</style>
+<script>
+    
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('survey-form');
+    const popup = document.getElementById('popup');
+    const closePopup = document.getElementById('close-popup');
+    const popupResults = document.getElementById('popup-results');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        let results = '<ul>';
+        formData.forEach((value, key) => {
+            results += `<li><strong>${key}:</strong> ${value}</li>`;
+        });
+        results += '</ul>';
+        popupResults.innerHTML = results;
+        popup.style.display = 'block';
+    });
+
+    closePopup.addEventListener('click', function () {
+        popup.style.display = 'none';
+        form.reset();
+    });
+
+    document.getElementById('reset-button').addEventListener('click', function () {
+        form.reset();
+    });
+});
+</script>
+<body>
+    <form id="survey-form">
+        <h2>Customer Survey Form</h2>
+        <div class="form-group">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" required>
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" required>
+        </div>
+        <div class="form-group">
+            <label for="date-of-birth">Date of Birth:</label>
+            <input type="date" id="date-of-birth" name="date-of-birth" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <select id="country" name="country" required>
+                <option value="" disabled selected>Select your country</option>
+                <option value="INDIA">INDIA</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">UK</option>
+                <!-- Add more countries here -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Gender:</label>
+            <input type="checkbox" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+            <input type="checkbox" id="female" name="gender" value="Female">
+            <label for="female">Female</label>
+        </div>
+        <div class="form-group">
+            <label for="profession">Profession:</label>
+            <input type="text" id="profession" name="profession" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" required>
+        </div>
+        <div class="buttons">
+            <button type="submit" id="submit-button">Submit</button>
+            <button type="button" id="reset-button">Reset</button>
+        </div>
+    </form>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" id="close-popup">&times;</span>
+            <h2>Survey Form Submission</h2>
+            <div id="popup-results"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
